@@ -141,7 +141,7 @@ ClassMethod body() As %Status
 							click:function(){
 							var form = this.getParentView();
 							var values = this.getFormView().getValues();
-							webix.message("value => " + values);
+							
 							if (form.validate())
 							{webix.ajax().post("/gasstation/fill-the-car", values).then(function(response){
 								var body = response.text();
@@ -195,7 +195,7 @@ ClassMethod body() As %Status
 							click:function(){
 							var form = this.getParentView();
 							var values = this.getFormView().getValues();
-							webix.message("value => " + values);
+							
 							if (form.validate())
 							{webix.ajax().post("/gasstation/feedback", values).then(function(response){
 								var body = response.text();
