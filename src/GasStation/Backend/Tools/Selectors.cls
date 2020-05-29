@@ -1,4 +1,4 @@
-Class GasStation.Backend.Tools.Select
+Class GasStation.Backend.Tools.Selectors
 {
 
 ClassMethod getCarIdByName(CarName As %String) As %Integer

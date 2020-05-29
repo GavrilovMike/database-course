@@ -108,10 +108,12 @@ ClassMethod body() As %Status
 							);
 						}
 					},
-						{view: "text", width:"500", name: "car", position:"center", label: "Car", labelWidth:100},
+						{view: "text", width:"500", name: "car", required: true, position:"center", label: "Car", labelWidth:100},
 						{view:"button", width:"500",value:"Check", id:"checkButton",
 							click:function(){
+								var form = this.getParentView();
 								var values = this.getFormView().getValues();
+								if (form.validate()) {
 							webix.ajax().post("/gasstation/check", values).then(function(response){
 								var body = response.text();
 									if(body==""){
@@ -121,6 +123,10 @@ ClassMethod body() As %Status
 									}
 								}
 							);
+								}
+								else {
+									webix.message({ type:"error", text:"Form data is invalid: Empty fields" });
+								}
 						}
 							
 							
@@ -128,6 +134,9 @@ ClassMethod body() As %Status
 						}
 					
 				],
+				rules:{
+    "car":webix.rules.isNotEmpty
+  },
 					
 				},
 
@@ -171,7 +180,7 @@ ClassMethod body() As %Status
 										var pumpPage = 'GasStation.Pages.PumpPage.cls';
 										location.href = pumpPage;
 									} else{
-										webix.message("Something goes wrong");
+										webix.message("Something goes wrong. You are nor currently filling");
 									}
 								}
 							);
